@@ -1,0 +1,81 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1 style="justify-self: center; font-family: fantasy; font-weight: normal">Public Artworks</h1>
+    <div class="workshops-grid">
+        <!--------- Macrame Section -------------->
+        {% for creator_name, macrames in macrames_by_creator.items %}
+            {% for macrame in macrames %}
+                <div class="workshop-card">
+                    <div class="artwork-label">Macrame</div>
+                    <h3 style="color: darkblue">{{ macrame.name }}</h3>
+                    {% if macrame.image_url %}
+                        <div class="workshop-image">
+                            <img src="{{ macrame.image_url }}" alt="{{ macrame.name }}">
+                        </div>
+                    {% endif %}
+                    <div class="workshop-content">
+                        <p>Creator: {{ creator_name }}</p>
+                        <p>Description: {{ macrame.description|truncatewords:30 }}</p>
+                        <ul class="workshop-details">
+                            <li>Knot type: {{ macrame.knot_type }}</li>
+                            {% if not macrame.last_bid is None %}
+                                <li>Last bid: ${{ macrame.last_bid }} by user {{ macrame.bidder }}</li>
+                            {% else %}
+                                <li>Price: ${{ macrame.price }}</li>
+                            {% endif %}
+                        </ul>
+                        <a href="{% url 'details_macrame' macrame.pk %}" class="view-button">View
+                            Details</a>
+                    </div>
+                </div>
+            {% endfor %}
+        {% endfor %}
+        <!--------- Art Paintings Section -------------->
+        {% for creator_name, arts in arts_by_creator.items %}
+            {% for art in arts %}
+                <div class="workshop-card">
+                    <div class="artwork-label">Art Painting</div>
+                    <h3 style="color: darkblue">{{ art.name }}</h3>
+                    {% if art.image_url %}
+                        <div class="workshop-image">
+                            <img src="{{ art.image_url }}" alt="{{ art.name }}">
+                        </div>
+                    {% endif %}
+                    <div class="workshop-content">
+                        <p>Creator: {{ creator_name }}</p>
+                        <p>Description: {{ art.description|truncatewords:30 }}</p>
+                        <ul class="workshop-details">
+                            {% if not art.last_bid is None %}
+                                <li>Last bid: ${{ art.last_bid }} by user {{ art.bidder }}</li>
+                            {% else %}
+                                <li>Price: ${{ art.price }}</li>
+                            {% endif %}
+                        </ul>
+                        <a href="{% url 'details_art-painting' art.pk %}" class="view-button">View
+                            Details</a>
+                    </div>
+                </div>
+            {% endfor %}
+        {% endfor %}
+    </div>
+    
+    {% if is_paginated %}
+        <div class="pagination">
+            {% if page_obj.has_previous %}
+                <a href="?page=1" class="pagination-link">&laquo; First</a>
+                <a href="?page={{ page_obj.previous_page_number }}" class="pagination-link">Previous</a>
+            {% endif %}
+
+            <span class="current-page">
+                Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}
+            </span>
+
+            {% if page_obj.has_next %}
+                <a href="?page={{ page_obj.next_page_number }}" class="pagination-link">Next</a>
+                <a href="?page={{ page_obj.paginator.num_pages }}" class="pagination-link">Last &raquo;</a>
+            {% endif %}
+        </div>
+    {% endif %}
+    
+{% endblock %}

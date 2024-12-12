@@ -1,0 +1,118 @@
+.workshops-current-header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 2rem;
+    color: forestgreen;
+    font-family: fantasy;;
+    font-weight: normal;
+}
+
+.workshop-current-card {
+    align-items: center;
+    background: rgba(255, 255, 255, 0.6);
+    backdrop-filter: blur(1px);
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 20px;
+    max-width: 600px;
+    margin: 1px auto;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.workshop-current-image {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 1rem;
+    align-items: center;
+    width: 100%;
+}
+
+.workshop-current-image img {
+    object-fit: cover;
+    object-position: center;
+    margin: 0 auto;
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+}
+
+.workshop-current-details {
+    list-style-type: none;
+    padding-bottom: 10px;
+    font-family: Tahoma, serif;
+    font-size-adjust: 0.75;
+    margin: 20px;
+    text-align: center;
+    object-position: center;
+}
+
+.workshop-buttons {
+    display: flex;
+    justify-content: center;
+    text-decoration: none;
+    gap: 10px; /* Adds spacing between buttons */
+    margin-top: 20px; /* Optional: Add spacing above the buttons */
+}
+
+.workshop-buttons a.view-button {
+    justify-content: center;
+    display: inline-block;
+    padding: 10px 15px;
+    margin: 5px 0;
+    color: #fff;
+    background-color: #00b318;
+    text-decoration: none;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+}
+
+.workshop-buttons a.view-button:hover {
+    background-color: #0056b3;
+    text-decoration: none;
+}
+
+.workshop-current-details ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    text-align: left;
+}
+
+.workshop-current-details li {;
+    margin-bottom: 10px;
+    line-height: 1.6;
+}
+
+
+.view-button {
+    display: inline-block;
+    padding: 8px 16px;
+    margin: 4px 0;
+    border-radius: 4px;
+    text-decoration: none;
+    text-align: center;
+    color: white;
+    background-color: #4a90e2;
+    transition: background-color 0.3s ease;
+}
+
+.view-button:hover {
+    background-color: #357abd;
+}
+
+.view-button.bg-green-500 {
+    background-color: #48bb78;
+}
+
+.view-button.bg-green-500:hover {
+    background-color: #38a169;
+}
+
+.view-button.bg-blue-500 {
+    background-color: #4299e1;
+}
+
+.view-button.bg-blue-500:hover {
+    background-color: #3182ce;
+}

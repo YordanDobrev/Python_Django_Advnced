@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ workshop.title }}{% endblock %}
+
+{% block content %}
+    <div class="row">
+        <!-- Main content: Workshop details -->
+        <div class="workshop-current-card">
+            <h2 class="workshops-current-header">{{ workshop.title }}</h2>
+
+            {% if workshop.image_url %}
+                <div class="workshop-current-image">
+                    <img src="{{ workshop.image_url }}" alt="{{ workshop.title }}">
+                </div>
+            {% endif %}
+
+            <div class="workshop-current-details">
+                <ul>
+                    <li><strong>Instructor:</strong> {{ workshop.instructor }}</li>
+                    <li><strong>Description:</strong> {{ workshop.description }}</li>
+                    <li><strong>Prerequisites:</strong> {{ workshop.prerequisites }}</li>
+                    <li><strong>Provided materials:</strong> {{ workshop.materials_provided }}</li>
+                    <li><strong>Workshop duration(in hours):</strong> {{ workshop.duration_hours }}</li>
+                    <li><strong>Workshop location:</strong> {{ workshop.location }}</li>
+                    {% if is_online %}
+                        <li><strong>Meeting URL:</strong> {{ workshop.meeting_url }}</li>
+                    {% endif %}
+                    <li><strong>Date:</strong> {{ workshop.date|date:"j F, Y" }}</li>
+                    <li><strong>Price:</strong> {{ workshop.price }} lv.</li>
+                    <li><strong>Capacity:</strong> {{ workshop.capacity }} spots</li>
+                </ul>
+            </div>
+
+
+            <div class="workshop-buttons">
+                {% if is_creator %}
+                    <a class="view-button" href="{% url 'workshop-edit' workshop.pk %}">Edit Workshop</a>
+                    <a class="view-button" style="background-color: darkred"
+                       href="{% url 'workshop-delete' workshop.pk %}">Delete Workshop</a>
+                {% else %}
+                    {% if request.user in workshop.participants.all %}
+                        <a class="view-button" style="background-color: darkred"
+                           href="{% url 'workshop-cancel-register' workshop.pk %}">Cancel Registration</a>
+                    {% else %}
+                        <a class="view-button" href="{% url 'workshop-register' workshop.pk %}">Register for the
+                            workshop</a>
+                    {% endif %}
+                {% endif %}
+            </div>
+        </div>
+    </div>
+{% endblock %}

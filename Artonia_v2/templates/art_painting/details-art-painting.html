@@ -1,0 +1,75 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <main>
+        <!-- Art Painting Details -->
+        <section>
+            <div class="workshop-current-card">
+                <h2 class="workshop-form-header">Art Painting Details</h2>
+                <img
+                        class="workshop-current-image"
+                        style="border-radius: 7px"
+                        src="{{ artpainting.image_url }}"
+                        alt={{ artpainting.name }}
+                />
+                <div class="workshop-current-details">
+                    <ul>
+                        <li><strong>Art Name:</strong> {{ artpainting.name }}</li>
+                        <li><strong>Description:</strong> {{ artpainting.description }}</li>
+                        <li><strong>Technique name:</strong> {{ artpainting.technique_name }}</li>
+                        <li><strong>Technique description:</strong> {{ artpainting.technique_description }}</li>
+                        <li><strong>Created:</strong> {{ artpainting.created_at|date:"d/M/Y" }}</li>
+                        <li><strong>Price:</strong> ${{ artpainting.price }}</li>
+                        <li><strong>Last bid:</strong> {% if artpainting.last_bid is None %} - {% else %}$
+                            {{ artpainting.last_bid }}{% endif %}</li>
+                        <li><strong>Last bid by:</strong> {% if artpainting.bidder is None %} - {% else %}
+                            {{ artpainting.bidder }}{% endif %}</li>
+                        <li><strong>Bid due date:</strong> {{ artpainting.bid_due_date|date:"d/M/Y" }}</li>
+                    </ul>
+                </div>
+
+                {% if is_creator %}
+                    <div>
+                        <p style="font-size: larger">Winner: <strong>{{ artpainting.bidder }}</strong></p>
+                    </div>
+                    <div class="workshop-buttons">
+                        <a class="view-button" href="{% url 'edit_art-painting' artpainting.pk %}">Edit</a>
+                        <a class="view-button" style="background-color: darkred"
+                           href="{% url 'delete_art-painting' artpainting.pk %}">Delete</a>
+                    </div>
+                {% else %}
+                    {% if artpainting.bid_due_date < closed_bid_date %}
+                        <div>
+                            <p style="font-size: larger">Winner: <strong>{{ artpainting.bidder }}</strong></p>
+                        </div>
+                    {% else %}
+                        <div class="workshop-buttons">
+                            <a class="view-button" href="{% url 'bid_macrame' artpainting.pk %}">Bid</a>
+                        </div>
+                    {% endif %}
+                {% endif %}
+
+                {% if artpainting.is_public %}
+                    <div class="text-sm text-gray-600 mt-2">
+                        <!-- Like Button -->
+                        <div class="workshop-buttons">
+                            {% if user.is_authenticated %}
+                                <form method="post" action="{% url 'art_like_toggle' artpainting.pk %}">
+                                    {% csrf_token %}
+                                    <button type="submit" class="like-button">
+                                        {% if user_has_liked %}
+                                            <span id="total-likes">Total Likes: {{ likes }} ❤️</span>
+                                        {% else %}
+                                            <span id="total-likes">Total Likes: {{ likes }} 🤍</span>
+                                        {% endif %}
+                                    </button>
+                                </form>
+                            {% endif %}
+                        </div>
+                    </div>
+                {% endif %}
+            
+            </div>
+        </section>
+    </main>
+{% endblock %}

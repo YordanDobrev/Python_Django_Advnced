@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+
+{% block title %}Cancel Registration - {{ workshop.title }}{% endblock %}
+
+{% block content %}
+    <div class="workshop-current-card">
+        <div class="workshop-current-details">
+            <h2 class="workshops-current-header" style="color: red">Cancel Workshop</h2>
+
+            <div class="workshop-current-details">
+                <h1 class="workshops-current-header">{{ workshop.title }}</h1>
+            </div>
+
+            <div class="workshop-current-details">
+                <div class="flex items-center">
+                    <div class="flex-shrink-0">
+                        <a id="warning">
+                            <img style="width: 400px; border-radius: 60%"
+                                 src="https://startsafety.uk/cdn/shop/files/start-traffic-hazard-attention-warning-symbol-main.jpg?v=1722382386"
+                                 alt="Warning">
+                        </a>
+                    </div>
+                    <div class="ml-3">
+                        <p style="font-family: fantasy; font-size: larger">
+                            Are you sure you want to cancel your registration? This action cannot be undone.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <form method="POST">
+                {% csrf_token %}
+                <div class="workshop-buttons">
+                    <button type="submit" class="view-button"><a style="text-underline: none; color: white"
+                            href="{% url 'workshop-detail' workshop.pk %}">Keep Registration</a>
+                    </button>
+                    <button type="submit" class="view-button" style="background-color: darkred; color: white">Cancel Registration</button>
+                </div>
+            </form>
+        </div>
+    </div>
+{% endblock %}

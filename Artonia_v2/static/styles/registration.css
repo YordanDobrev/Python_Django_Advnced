@@ -1,0 +1,131 @@
+/* Form containers */
+.login-form-container,
+.register-form-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* Form groups */
+.form-group {
+    width: 100%;
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+    color: #8b7355;
+    font-style: italic;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 8px 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 14px;
+    box-sizing: border-box;
+    text-align: center;
+}
+
+/* Button styles */
+.button-container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.login-button,
+.register-button {
+    background-color: #1d4b4a;
+    color: white;
+    padding: 12px 35px;
+    border: none;
+    border-radius: 25px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.register-button:hover {
+    background-color: #245f5e;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.register-button:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Additional elements */
+.register-link {
+    margin-top: 15px;
+    color: black;
+    font-style: italic;
+    font-size: 23px;
+}
+
+.register-link a {
+    color: #2c0cf4;
+    text-decoration: none;
+}
+
+.register-link a:hover {
+    text-decoration: none;
+}
+
+.password-requirements {
+    font-size: 12px;
+    color: #ff0000;
+    margin: 5px 0 15px 0;
+    padding-left: 0;
+    list-style-type: none;
+    text-align: center;
+}
+
+.password-requirements li {
+    margin-bottom: 3px;
+    font-style: italic;
+}
+
+.email-input {
+    margin-bottom: 5px;
+}
+
+.error-message {
+    color: #dc3545;
+    font-size: 12px;
+    margin-top: 4px;
+    font-style: italic;
+}
+
+.confirmation-text {
+    color: #ff0000;
+    font-style: italic;
+    text-align: center;
+    margin-bottom: 5px;
+}
+
+.form-group label,
+.password-requirements,
+.confirmation-text {
+    width: 100%;
+    text-align: center;
+}
+
+/* Helper classes */
+.helptext {
+    color: #ff0000;
+}
+
+.errorlist {
+    font-size: 18px;
+    color: #e96f6f;
+}

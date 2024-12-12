@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1 class="container" style="text-align: center">Edit Art Painting</h1>
+    {% include 'navigation.html' %}
+        <form action="{% url 'edit-art-painting' art_painting.id%}" method="post">
+            {{ form.as_p }}
+            {% csrf_token %}
+            <button class="button-9" type="submit">Save</button>
+        </form>
+      <!-- Display form errors if any -->
+  {% if form.errors %}
+    <div class="errors">
+      <ul>
+        {% for field in form %}
+          {% for error in field.errors %}
+            <li>{{ error }}</li>
+          {% endfor %}
+        {% endfor %}
+      </ul>
+    </div>
+  {% endif %}
+{% endblock %}

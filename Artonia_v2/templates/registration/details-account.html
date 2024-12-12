@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+    <main>
+        <section>
+            <div class="workshop-form-card">
+                <h2 class="workshop-form-header">Profile Details</h2>
+
+                <!-- if the user has provided a profile image link -->
+                {% if user.image_url %}
+                    <img
+                            class="workshop-current-image"
+                            style="border-radius: 4%"
+                            src="{{ user.image_url }}"
+                            alt="profile img"
+                    />
+                {% else %}
+                    <!-- if the user has NO profile image link -->
+                    <img
+                            class="workshop-current-image"
+                            style="border-radius: 4%"
+                            alt="profile img"
+                            src="https://t.ly/XISsv"
+                    />
+                {% endif %}
+
+                <!-- User's full name -->
+                <p>Full Name: {{ user.first_name }} {{ user.last_name }}</p>
+                <p>Username: {{ user.username }}</p>
+
+                <div>
+                    <div>
+                        {% if user.description %}
+                            <p>Description: <span>{{ user.description }}</span></p>
+                        {% endif %}
+                        <p>Last Login: <span>{{ user.last_login|date }}</span></p>
+                    </div>
+                    <!--Edit and Delete buttons -->
+                    <div class="workshop-form-buttons">
+                        <a class="view-button" href="{% url 'user_edit' user.pk %}">Edit Profile</a>
+                        <a class="view-button" href="{% url 'user_delete' user.pk %}">Delete Profile</a>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+    </main>
+
+{% endblock %}
+ 

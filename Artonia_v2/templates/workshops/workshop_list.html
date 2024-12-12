@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+{% block title %}Workshops List{% endblock %}
+
+{% block content %}
+    <div class="workshops-header">
+
+        {% if is_instructor %}
+            <span><a href="{% url 'workshop-create' %}" class="view-button">Create New Workshop</a></span>
+        {% endif %}
+    </div>
+    <h1 style="justify-self: center; font-family: fantasy; font-weight: normal">Available Workshops</h1>
+    <div class="workshops-grid">
+        {% for workshop in workshops %}
+            <div class="workshop-card">
+                {% if request.user in workshop.participants.all %}
+                    <div class="registered-label">Registered</div>
+                {% endif %}
+
+                <h3 style="color: darkblue">{{ workshop.title }}</h3>
+                {% if workshop.image_url %}
+                    <div class="workshop-image">
+                        <img src="{{ workshop.image_url }}" alt="{{ workshop.title }}">
+                    </div>
+                {% endif %}
+                <div class="workshop-content">
+                    <p>{{ workshop.description|truncatewords:30 }}</p>
+                    <ul class="workshop-details">
+                        <li>Date: {{ workshop.location }}</li>
+                        <li>Date: {{ workshop.date|date:"F j, Y" }}</li>
+                        <li>Price: ${{ workshop.price }}</li>
+                        <li>Available Spots: {{ workshop.capacity }}</li>
+                    </ul>
+                    <a href="{% url 'workshop-detail' workshop.pk %}" class="view-button">View Details</a>
+                </div>
+            </div>
+        {% empty %}
+            <p class="no-workshops">No workshops available.</p>
+        {% endfor %}
+    </div>
+
+    {% if is_paginated %}
+        <div class="pagination">
+            {% if page_obj.has_previous %}
+                <a href="?page=1" class="pagination-link">&laquo; First</a>
+                <a href="?page={{ page_obj.previous_page_number }}" class="pagination-link">Previous</a>
+            {% endif %}
+
+            <span class="current-page">
+                Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}
+            </span>
+
+            {% if page_obj.has_next %}
+                <a href="?page={{ page_obj.next_page_number }}" class="pagination-link">Next</a>
+                <a href="?page={{ page_obj.paginator.num_pages }}" class="pagination-link">Last &raquo;</a>
+            {% endif %}
+        </div>
+    {% endif %}
+{% endblock %}

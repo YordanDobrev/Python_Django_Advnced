@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <main>
+        <section>
+            <div class="workshop-form-card">
+                <h2>Edit Profile</h2>
+
+                <form class="workshop-form-fields" method="POST">
+                    {% csrf_token %}
+                    {{ form }}
+                    <!-- form button -->
+                    <div class="workshop-form-buttons">
+                        <button type="submit" style="text-decoration: none" href="{% url 'user_details' user.pk %}">
+                            Edit
+                        </button>
+                        <button type="submit" class="view-button" style="background-color: darkred"><a
+                                href="{% url 'user_details' request.user.pk %}" style="color: white">Cancel</a>
+                        </button>
+                    </div>
+                </form>
+
+            </div>
+        </section>
+    </main>
+{% endblock %}
+ 

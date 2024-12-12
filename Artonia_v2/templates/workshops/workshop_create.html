@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="workshop-form-card">
+        <h1 class="workshop-form-header">Create New Workshop</h1>
+        <form class="workshop-form-fields" method="post">
+            {% csrf_token %}
+            {{ form }}
+            <div class="workshop-form-buttons">
+                <button type="submit" class="btn btn-primary">Create Workshop</button>
+                <button type="submit" class="view-button" style="background-color: darkred"><a
+                        href="{% url 'workshop-list'%}" style="color: white">Abort Workshop Creation</a>
+                </button>
+            </div>
+        </form>
+    </div>
+{% endblock %}

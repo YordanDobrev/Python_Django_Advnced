@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+      <section id="detailsPage">
+        <div class="wrapper">
+          <div class="albumCover">
+            <!-- Album Image -->
+            <img src="{% static 'images/Lorde.jpg' %}" alt="Cover Image" />
+          </div>
+
+          <div class="albumInfo">
+            <div class="albumText">
+              <!-- Album Info -->
+              <h1>{{ album.album_name }}</h1>
+              <h3>{{ album.artist }}</h3>
+              <h4>{{ album.genre }}</h4>
+              <h4>${{ album.price }}</h4>
+              <p>{{ album.description }}</p>
+            </div>
+
+            <div class="actionBtn">
+              <!-- Album Buttons -->
+                <a href="{% url 'album_edit' album.pk %}" class="edit">Edit</a> 
+              <a href="{% url 'album_delete' album.pk %}" class="remove">Delete</a>
+            </div>
+          </div>
+        </div>
+      </section>
+	
+{% endblock %}

@@ -1,0 +1,75 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <main>
+        <section>
+            <div class="workshop-current-card">
+                <h2 class="workshop-form-header">Macrame Details</h2>
+                <!-- Macrame image -->
+                <img
+                        class="workshop-current-image"
+                        style="border-radius: 7px"
+                        src="{{ macrame.image_url }}"
+                        alt="{{ macrame.name }}"
+                />
+                <div class="workshop-current-details">
+                    <!-- macrame content -->
+                    <ul>
+                        <li><strong>Name:</strong> {{ macrame.name }}</li>
+                        <li><strong>Description:</strong> {{ macrame.description }}</li>
+                        <li><strong>Knot type:</strong> {{ macrame.knot_type }}</li>
+                        <li><strong>Difficulty level:</strong> {{ macrame.difficulty_level }}</li>
+                        <li><strong>Price:</strong> ${{ macrame.price }}</li>
+                        <li><strong>Last bid:</strong> {% if macrame.last_bid is None %} - {% else %}$
+                            {{ macrame.last_bid }}{% endif %}</li>
+                        <li><strong>Last bid by:</strong> {% if macrame.bidder is None %} - {% else %}
+                            {{ macrame.bidder }}{% endif %}</li>
+                        <li><strong>Bid due date:</strong> {{ macrame.bid_due_date|date:"d/M/Y" }}</li>
+                    </ul>
+                </div>
+
+                {% if is_creator %}
+                    <div>
+                        <p style="font-size: larger">Winner: <strong>{{ macrame.bidder }}</strong></p>
+                    </div>
+                    <div class="workshop-buttons">
+                        <a class="view-button" href="{% url 'edit_macrame' macrame.pk %}">Edit</a>
+                        <a class="view-button" style="background-color: darkred"
+                           href="{% url 'delete_macrame' macrame.pk %}">Delete</a>
+                    </div>
+                {% else %}
+                    {% if macrame.bid_due_date < closed_bid_date %}
+                        <div>
+                            <p style="font-size: larger">Winner: <strong>{{ macrame.bidder }}</strong></p>
+                        </div>
+                    {% else %}
+                        <div class="workshop-buttons">
+                            <a class="view-button" href="{% url 'bid_macrame' macrame.pk %}">Bid</a>
+                        </div>
+                    {% endif %}
+                {% endif %}
+
+                {% if macrame.is_public %}
+                    <div class="text-sm text-gray-600 mt-2">
+                        <!-- Like Button -->
+                        <div class="workshop-buttons">
+                            {% if user.is_authenticated %}
+                                <form method="post" action="{% url 'like_toggle' macrame.pk %}">
+                                    {% csrf_token %}
+                                    <button type="submit" class="like-button">
+                                        {% if user_has_liked %}
+                                            <span id="total-likes">Total Likes: {{ likes }} ❤️</span>
+                                        {% else %}
+                                            <span id="total-likes">Total Likes: {{ likes }} 🤍</span>
+                                        {% endif %}
+                                    </button>
+                                </form>
+                            {% endif %}
+                        </div>
+                    </div>
+                {% endif %}
+
+            </div>
+        </section>
+    </main>
+{% endblock %}

@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <main>
+        <!-- Delete Macrame Form -->
+        <section>
+            <div class="workshop-form-card">
+                <h2 class="workshop-form-header">Delete Macrame</h2>
+
+                <form class="workshop-form-fields" method="POST" action="">
+                    {% csrf_token %}
+                    {{ form }}
+                    <!-- form button -->
+                    <div class="workshop-form-buttons">
+                        <button type="submit">Delete</button>
+                        <button class="view-button" style="background-color: darkred"><a
+                                href="{% url 'dashboard' %}" style="color: white">Cancel</a>
+                        </button>
+                    </div>
+
+                </form>
+            </div>
+        </section>
+    </main>
+{% endblock %}
+

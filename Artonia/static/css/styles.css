@@ -1,0 +1,160 @@
+form {
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    padding-right: 40px;
+    background-color: #89a5ff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+form div {
+    margin-bottom: 15px;
+}
+
+form label {
+    display: block;
+    color: #fff;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+form input[type="text"],
+form textarea {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+form textarea {
+    resize: vertical;
+}
+
+form input[type="submit"] {
+    padding: 10px 20px;
+    font-size: 16px;
+    color: #fff;
+    background-color: #007bff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    width: 100%; /* Make it full-width to match other input elements */
+}
+
+form input[type="submit"]:hover {
+    background-color: #0056b3;
+}
+
+/* Adjusted .button-9 to match the form's theme */
+.button-9 {
+    appearance: button;
+    background-color: #00ffd9; /* Match form submit button color */
+    border-radius: 6px;
+    border-width: 0;
+    color: #fff;
+    cursor: pointer;
+    font-family: -apple-system, system-ui, "Segoe UI", Roboto, "Helvetica Neue", Ubuntu, sans-serif;
+    font-size: 16px;
+    height: 44px;
+    line-height: 1.15;
+    margin-top: 12px;
+    padding: 10px 20px;
+    text-align: center;
+    text-transform: none;
+    transition: all 0.2s, box-shadow 0.08s ease-in;
+    width: 100%; /* Consistent width */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Slight shadow */
+}
+
+.button-9:hover {
+    background-color: #00b3a4; /* Darken on hover */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15); /* Enhance shadow on hover */
+}
+
+.button-9:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+}
+
+.button-9:focus {
+    box-shadow: rgba(50, 151, 211, .3) 0 0 0 4px, 0 0 10px rgba(0, 0, 0, .2); /* Focus shadow */
+    outline: none;
+}
+
+fieldset {
+    border: 2px solid #ccc;
+    border-radius: 10px;
+    padding: 20px;
+}
+
+legend {
+    font-size: 1.2em;
+    font-weight: bold;
+    color: white;
+}
+
+.radio-select {
+    display: flex;
+    flex-direction: column;
+}
+
+.radio-select > div {
+    margin-bottom: 10px;
+}
+
+.radio-select input[type="radio"] {
+    margin-right: 10px;
+}
+
+.radio-select label {
+    display: flex;
+    font-size: 1em;
+    cursor: pointer;
+}
+
+.radio-select input[type="radio"]:hover + label,
+.radio-select input[type="radio"]:focus + label {
+    color: #007BFF;
+}
+
+.radio-select input[type="radio"]:checked + label {
+    font-weight: bold;
+    color: #007BFF;
+}
+
+.section {
+    text-align: center;
+}
+
+table {
+    margin: 100px auto;
+}
+
+.button-edit {
+    display: inline-block !important;
+    background-color: #00b318 !important;
+    color: white !important;
+    padding: 6px 12px !important;
+    font-size: 12px !important;
+    border: none !important;
+    border-radius: 4px !important;
+    text-decoration: none !important;
+    cursor: pointer !important;
+}
+
+.button-edit:hover {
+    background-color: #007d12;  /* Darker green on hover */
+}
+
+.button-edit:active {
+    background-color: #005b0e;  /* Even darker green when clicked */
+}
+
+article .title {
+    margin-top: 40px !important; /* Force margin to apply */
+    text-align: center !important; /* Optional: center the text */
+}

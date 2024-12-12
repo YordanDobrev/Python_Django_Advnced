@@ -1,0 +1,159 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="dashboard-container">
+        <div class="workshops-header">
+            <span><a href="{% url 'create_macrame' %}" class="view-button">Create New Macrame</a></span>
+            <span style="margin-left: 10px"><a href="{% url 'create-art-painting' %}" class="view-button">Create New Art Painting</a></span>
+        </div>
+
+        <!-- Workshops Section -->
+        <section class="registered-workshops">
+            <div class="workshop-current-card" style="max-width: 700px; background: rgb(0,255,217, 0.1)">
+                <h2 class="workshops-current-header"
+                    style="color: #53773b;text-shadow: -1px -1px 0 #fff, 1px -1px 0 #fff, -1px 1px 0 #fff, 1px 1px 0 #fff;">
+                    Workshops I'm Registered For
+                </h2>
+            </div>
+            {% if registered_workshops %}
+                <div class="workshops-grid">
+                    {% for workshop in registered_workshops %}
+                        <div class="workshop-card">
+                            <h3 style="color: darkblue">{{ workshop.title }}</h3>
+                            {% if workshop.image_url %}
+                                <div class="workshop-image">
+                                    <img src="{{ workshop.image_url }}" alt="{{ workshop.title }}">
+                                </div>
+                            {% endif %}
+                            <div class="workshop-content">
+                                <p><strong>Description:</strong> {{ workshop.description|truncatewords:30 }}</p>
+                                <ul class="workshop-details">
+                                    <li><strong>Location:</strong> {{ workshop.location }}</li>
+                                    <li><strong>Date:</strong> {{ workshop.date|date:"F j, Y" }}</li>
+                                    <li><strong>Price:</strong> ${{ workshop.price }}</li>
+                                </ul>
+                                <a href="{% url 'workshop-detail' workshop.pk %}" class="view-button">View Details</a>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            {% else %}
+                <p style="color: red; font-family: fantasy; font-size: larger">You haven't registered for any workshops
+                    yet.</p>
+            {% endif %}
+        </section>
+        <!-- Artworks Section -->
+        {% if macrames or art_paint %}
+            <section class="registered-workshops">
+                <div class="workshop-current-card" style="max-width: 700px; background: rgb(0,255,217, 0.1)">
+                    <h2 class="workshops-current-header"
+                        style="color: #53773b; text-shadow: -1px -1px 0 #fff, 1px -1px 0 #fff, -1px 1px 0 #fff, 1px 1px 0 #fff;">
+                        My Artworks
+                    </h2>
+                </div>
+                
+                <div class="workshops-grid">
+                    {% for macrame in macrames %}
+                        <div class="workshop-card">
+                            <h3 style="color: darkgreen">{{ macrame.name }}</h3>
+                            {% if macrame.image_url %}
+                                <div class="workshop-image">
+                                    <img src="{{ macrame.image_url }}" alt="{{ macrame.name }}">
+                                </div>
+                            {% endif %}
+                            <div class="workshop-content">
+                                <p>{{ macrame.description|truncatewords:30 }}</p>
+                                <ul class="workshop-details">
+                                    <li>Price: {{ macrame.price }} lv.</li>
+                                </ul>
+                                <div class="flex flex-col space-y-2">
+                                    <a href="{% url 'details_macrame' macrame.pk %}" class="view-button">View
+                                        Details</a>
+
+                                    <!-- Share Toggle Button -->
+                                    <form method="post"
+                                          action="{% url 'toggle_artwork_visibility' macrame.pk 'macrame' %}"
+                                          class="inline">
+                                        {% csrf_token %}
+                                        <button type="submit"
+                                                class="view-button {% if macrame.is_public %}bg-green-500{% else %}bg-blue-500{% endif %} w-full">
+                                            {% if macrame.is_public %}
+                                                ✓ Shared Publicly
+                                            {% else %}
+                                                Share to Artwork Gallery
+                                            {% endif %}
+                                        </button>
+                                    </form>
+                                    {% if macrame.is_public %}
+                                        <div class="text-sm text-gray-600 mt-2">
+                                            <span class="ml-3">❤️ Likes: {{ macrame.likes.count }}</span>
+                                        </div>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+
+                    {% for arts in art_paint %}
+                        <div class="workshop-card">
+                            <h3 style="color: darkgreen">{{ arts.name }}</h3>
+                            {% if arts.image_url %}
+                                <div class="workshop-image">
+                                    <img src="{{ arts.image_url }}" alt="{{ arts.name }}">
+                                </div>
+                            {% endif %}
+                            <div class="workshop-content">
+                                <p>{{ arts.description|truncatewords:30 }}</p>
+                                <ul class="workshop-details">
+                                    <li>Price: {{ arts.price }} lv.</li>
+                                </ul>
+                                <div class="flex flex-col space-y-2">
+                                    <a href="{% url 'details_art-painting' arts.pk %}" class="view-button">View
+                                        Details</a>
+
+                                    <!-- Share Toggle Button -->
+                                    <form method="post"
+                                          action="{% url 'toggle_artwork_visibility' arts.pk 'painting' %}"
+                                          class="inline">
+                                        {% csrf_token %}
+                                        <button type="submit"
+                                                class="view-button {% if arts.is_public %}bg-green-500{% else %}bg-blue-500{% endif %} w-full">
+                                            {% if arts.is_public %}
+                                                ✓ Shared Publicly
+                                            {% else %}
+                                                Share to Artwork Gallery
+                                            {% endif %}
+                                        </button>
+                                    </form>
+                                    {% if arts.is_public %}
+                                        <div class="text-sm text-gray-600 mt-2">
+                                            <span class="ml-3">❤️ Likes: {{ arts.likes.count }}</span>
+                                        </div>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                
+                </div>
+            </section>
+        {% endif %}
+
+        {% if is_paginated %}
+            <div class="pagination">
+                {% if page_obj.has_previous %}
+                    <a href="?page=1" class="pagination-link">&laquo; First</a>
+                    <a href="?page={{ page_obj.previous_page_number }}" class="pagination-link">Previous</a>
+                {% endif %}
+                <span class="current-page">
+                                Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}
+                            </span>
+                {% if page_obj.has_next %}
+                    <a href="?page={{ page_obj.next_page_number }}" class="pagination-link">Next</a>
+                    <a href="?page={{ page_obj.paginator.num_pages }}" class="pagination-link">Last &raquo;</a>
+                {% endif %}
+            </div>
+        {% endif %}
+    </div>
+
+{% endblock %}

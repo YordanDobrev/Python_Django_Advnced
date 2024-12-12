@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <main>
+        <!-- Edit Workshop Form -->
+        <section>
+            <div class="workshop-form-card">
+                <h2 class="workshop-form-header">Edit Workshop</h2>
+
+                <form class="workshop-form-fields" method="POST" action="">
+                    {% csrf_token %}
+                    {{ form }}
+                    <!-- form button -->
+                    <div class="workshop-buttons">
+                        <button class="view-button" type="submit">Edit</button>
+                        <button type="submit" class="view-button" style="background-color: darkred"><a
+                                href="{% url 'workshop-detail' workshop.pk %}" style="color: white">Cancel</a>
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </section>
+    </main>
+{% endblock %}

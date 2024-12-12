@@ -1,0 +1,50 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+
+:root {
+    --white-color: #ffffff;
+    --h2-color: rgb(240, 156, 47);
+    --card-background: rgb(124, 112, 102);
+    --card-box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+    --orange-background: rgb(240, 156, 47);
+    --hover-background: #edb721;
+    --border-radius-big: 25px;
+    --light-input-background: #f8f4b4;
+    --light-border: 1px solid rgb(206, 206, 206);
+    --readonly-background: rgb(216, 206, 200);
+
+}
+
+
+#dashboard {
+    margin: 1px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+
+}
+
+h2 {
+    text-align: center;
+    font-size: 50px;
+    color: var(--h2-color);
+}
+
+
+
+
+.details-btn {
+    margin-top: 4px;
+    text-decoration: none;
+    font-size: 21px;
+    width: 160px;
+    border-radius: 3px;
+    text-align: center;
+    color: white;
+    background: var(--orange-background);
+}
+
+.details-btn:hover {
+    background: var(--hover-background);
+    font-weight: bolder;
+}

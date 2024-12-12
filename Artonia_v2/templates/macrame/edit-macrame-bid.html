@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <main>
+        <!-- Bid Macramé Form -->
+        <section>
+            <div class="workshop-form-card">
+                <h2 class="workshop-form-header">Bid Macrame</h2>
+
+                <form class="workshop-form-fields" method="POST" action="">
+                    {% csrf_token %}
+                    {{ form }}
+                    <!-- form button -->
+                    <div class="workshop-buttons">
+                        <button class="view-button" type="submit">Bid</button>
+                        <a class="view-button" type="submit" style="background-color: darkred; margin: initial"
+                           href="{% url 'details_macrame' macrame.pk %}">Cancel</a>
+                    </div>
+                </form>
+                
+            </div>
+        </section>
+    </main>
+{% endblock %}

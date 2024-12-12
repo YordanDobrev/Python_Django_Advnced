@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    
+    <form class="workshop-current-card" method="post">
+        {% csrf_token %}
+        <div class="workshop-form-fields">
+            {{ form }}
+        </div>
+        <div class="button-container">
+            <button class="register-button">Register</button>
+        </div>
+    </form>
+    
+{% endblock %}

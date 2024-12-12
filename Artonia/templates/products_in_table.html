@@ -1,0 +1,89 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+    <img width="400" src="{% static 'images/Artonia Logo.jpg' %}" alt="Macrame" class="shadow p-3 mb-5 bg-white rounded mx-auto d-block">
+    {% include 'navigation.html' %}
+<section class="section">
+    <article class="container">
+    <h1 type="title">Macrame</h1>
+        <!-- Check if the product list is not empty -->
+        {% if macrame %}
+            <table class="table border border-0" style="text-align: left">
+                <thead class="table-success">
+                <tr>
+                    <th>Options</th>
+                    <th>Name</th>
+                    <th>Description</th>
+                    <th>Price</th>
+                    <th>Picture</th>
+                </tr>
+                </thead>
+                <tbody>
+                <!-- Loop through each product and create a table row -->
+                {% for m in macrame %}
+                    <tr>
+                        <td>
+                            <a href="{% url 'edit-macrame' m.id%}" class="btn btn-success btn-sm">Edit</a>
+                        </td>
+                        <td>{{ m.name }}</td>
+                        <td>{{ m.description }}</td>
+                        <td>{{ m.price }}</td>
+                        <td>
+                            {% if m.image %}
+                                <img src="https://res.cloudinary.com/dbq91oe2z/{{ m.image }}" alt="Macrame">
+{##}
+{#                                <img src="{{ m.image }}" width="50" height="50" alt="Macrame">#}
+                            {% else %}
+                                <p>No Image</p>
+                            {% endif %}
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        {% else %}
+            <p>No products available.</p>
+        {% endif %}
+    </article>
+    <article class="container">
+        <h2>Art Paintings List</h2>
+        <!-- Check if the product list is not empty -->
+        {% if art_paintings %}
+            <table class="table border border-0"  style="text-align: left">
+                <thead class="table-success">
+                <tr>
+                    <th>Options</th>
+                    <th>Name</th>
+                    <th>Description</th>
+                    <th>Price</th>
+                    <th>Picture</th>
+                </tr>
+                </thead>
+                <tbody>
+                <!-- Loop through each product and create a table row -->
+                {% for a in art_paintings %}
+                    <tr>
+                        <td>
+                            <a href="{% url 'edit-art-painting' a.id %}" class="btn btn-success btn-sm">Edit</a>
+                        </td>
+                        <td>{{ a.name }}</td>
+                        <td>{{ a.description }}</td>
+                        <td>{{ a.price }}</td>
+                        <td>
+                            {% if a.image %}
+                                <img src="{{ a.image }}" width="50" height="50" alt="Art Painting">
+                            {% else %}
+                                <p>No Image</p>
+                            {% endif %}
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        {% else %}
+            <p>No products available.</p>
+        {% endif %}
+    </article>
+</section>
+{% endblock %}

@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="workshop-current-card">
+    
+        <form class='workshop-form-fields' method="post">
+            {% csrf_token %}
+            {{ form }}
+            <div class="workshop-form-buttons">
+                <button class="login-button">Login</button>
+            </div>
+            <p class="register-link">
+                Don't have an account? <a href="{% url 'register' %}">Register</a>
+            </p>
+        </form>
+    
+    </div>
+{% endblock %}

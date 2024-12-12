@@ -1,0 +1,67 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <link rel="stylesheet" href="{% static 'styles/styles.css' %}"/>
+    <link rel="icon" type="image/x-icon" href="{% static 'images/macrame-art-icon.svg' %}">
+    <title>Artonia</title>
+</head>
+<body>
+<div id="wrapper">
+    <header>
+        <!-- Logo image: link to index/home page -->
+        <a id="logo" href="{% url 'home' %}">
+            <img id="logo-img" src="{% static 'images/Artonia Circle Logo_2.JPG' %}" alt="logo">
+            <span class="logo-text">Artonia</span>
+        </a>
+        <!-- Navigation -->
+        <nav>
+            {% if request.user.is_authenticated %}
+                <div>
+                    <a style="text-decoration: none" href="{% url 'dashboard' %}">Dashboard</a>
+                    <a style="text-decoration: none" href="{% url 'public_artwork_list' %}">Artworks</a>
+                    <a style="text-decoration: none" href="{% url 'workshop-list' %}">Workshops</a>
+                    <a style="text-decoration: none" href="{% url 'user_details' user.pk %}">Profile</a>
+
+                    <!-- Logout Link -->
+                    <a style="text-decoration: none" href="{% url 'logout' %}"
+                       onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                        Logout
+                    </a>
+                </div>
+
+                <!-- Logout Form (hidden) -->
+                <form id="logout-form" method="post" action="{% url 'logout' %}" style="display: none;">
+                    {% csrf_token %}
+                </form>
+                
+            {% else %}
+                <div class="guest">
+                    <a style="text-decoration: none" href="{% url 'login' %}">Login</a>
+                    <a style="text-decoration: none" href="{% url 'register' %}">Create Profile</a>
+                </div>
+            {% endif %}
+        
+        </nav>
+    </header>
+
+    <div class="background-container">
+        <div class="content">
+            {% block content %}
+            {% endblock %}
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    <script src="{% static 'like_script.js' %}"></script>
+
+</div>
+
+<!-- Footer -->
+<footer>&copy;Artonia Team 2024. All rights reserved.</footer>
+</body>
+</html>
